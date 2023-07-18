@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <!-- <link rel="stylesheet" href="../public/Lugrasimo/Lugrasimo-Regular.ttf"> -->
+    <style>
+        /* :root {
+            --background : black;
+            --light-background: rgb(23,23,23);
+            --text: white;
+            --button-border: purple;
+            --button-background: purple;
+            --button-text: white;
+        } */
+
+        /* :root {
+            --background: white;
+            --light-background: rgba(78, 76, 78, 0.05);
+            --text: purple;
+            --button-background: white;
+            --button-border: purple;
+            --button-text: purple;
+        } */
+
+        @font-face {
+            font-family: "Lugrasimo";
+            font-size:1.5rem;
+            src: url("./Lugrasimo/Lugrasimo-Regular.ttf"), format('truetype');
+        }
+        
+        @font-face {
+            font-family: "Poppins-Bold";
+            font-size:1.5rem;
+            src: url("./Poppins/Poppins-Bold.ttf"), format('truetype');
+        }
+
+        body {
+            background: var(--background);
+            padding:10% 0;
+            font-family: "Lugrasimo";
+            font-weight: bold;
+        }
+
+        form{
+            width: 50%;
+            height:fit-content;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            padding: 5% 10%;
+            border: 2px solid var(--background);
+            border-radius: 16px;
+            background: var(--light-background);
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+
+        div.wrapper {
+            width: 100%;
+            margin-bottom:20px;
+            position:relative;
+        }
+        
+        div.wrapper h1 {
+            font-family: "Poppins-Bold";
+            text-align: center;
+            color:var(--text);
+            margin:0;
+            padding:0;
+        }
+
+        div.wrapper label {
+            color: var(--text);
+            display:block;
+            font-weight: bold;
+        }
+
+        div.wrapper input {
+            width:100%;
+            height:30px;
+            margin:10px 30px;
+            margin-left:0;
+            color: var(--text);
+            background: var(--background);
+            outline:var(--text);
+            border: 1px solid var(--background);
+            border-radius: 16px;
+            padding:5px;
+            padding-left:10px;
+            padding-right:10px;
+            font-size:15px;
+            font-family: "Lugrasimo";
+        }
+
+        div.wrapper textarea{
+            width:100%;
+            height:100px;
+            color: var(--text);
+            background: var(--background);
+            outline:var(--background);
+            border: 1px solid var(--background);
+            border-radius: 16px;
+            padding:10px;
+            font-size:15px;
+            font-family: "Lugrasimo";
+        }
+
+        div.wrapper input[type="button"] {
+            background: var(--button-background);
+            color:var(--button-text);
+            width: fit-content;
+            height:fit-content;
+            border-radius: 16px;
+            padding:10px;
+            font-weight: bold;
+            font-size:larger;
+            border:1px solid var(--button-border);
+            position:absolute;
+            right:0px;
+            margin:0px;
+            cursor: pointer;
+            font-family: "Lugrasimo";
+        }
+
+        @media(prefers-color-scheme: light) {
+            :root {
+                --background: white;
+                --light-background: rgba(78, 76, 78, 0.05);
+                --text: purple;
+                --button-background: white;
+                --button-border: purple;
+                --button-text: purple;
+            }
+
+            body {
+                background: var(--light-background);
+            }
+
+            div.wrapper input[type="button"]:hover {
+                background: var(--button-text);
+                color: var(--button-background);
+                transition: background, color .4s ease-in-out;
+            }
+
+            form {
+                background: var(--background);
+            }
+
+            div.wrapper input {
+                background: var(--light-background);
+                border: var(--light-background)
+            }
+
+            div.wrapper textarea {
+                background: var(--light-background);
+                border: var(--light-background);
+            }
+        }
+
+        @media(prefers-color-scheme: dark) {
+            :root {
+                --background : black;
+                --light-background: rgb(23,23,23);
+                --text: white;
+                --button-border: purple;
+                --button-background: purple;
+                --button-text: white;
+            }
+        }
+
+        @media(max-width : 450px) {
+            body {
+                padding-top:0%;
+            }
+            form {
+                width:70%;
+                top:20%;
+                transform: translate(-50%, -20%);
+            }
+
+            div.wrapper.button-wrapper {
+                height: 30px;
+            }
+        }
+
+        @media(max-width: 750px) {
+            div.wrapper.button-wrapper {
+                height: 40px;
+            }
+        }
+
+        @media(max-width: 1000px) {
+            div.wrapper.button-wrapper {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body class="">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="wrapper">
+            <h1>Contact Us</h1>
+        </div>
+        <div class="wrapper">
+            <label for="name">Enter your full name</label>
+            <input 
+                type="text"
+                name="name" 
+                id="name"
+                placeholder="example: Tony Stark"
+            />
+        </div>
+        <div class="wrapper">
+            <label for="email">Enter your email</label>
+            <input 
+                type="email" 
+                name="email" 
+                id="email"
+                placeholder="example: email@email.com"
+            />
+        </div>
+        <div class="wrapper">
+            <label for="message">Enter your message</label>
+            <textarea 
+                type="text" 
+                name="message" 
+                id="message"
+                placeholder="Type your message here..."
+            ></textarea>
+        </div>
+        <div class="wrapper button-wrapper">
+            <input 
+                type="button" 
+                name="submit" 
+                value="Submit"
+            />
+        </div>
+    </form>
+</body>
+</html>
