@@ -4,25 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <!-- <link rel="stylesheet" href="../public/Lugrasimo/Lugrasimo-Regular.ttf"> -->
+    <link rel="stylesheet" href="./fontawesome-free-6.4.0-web/css/all.css">
+    <script>
+        //determines if the user has a set theme
+        function detectColorScheme() {
+            var theme="dark";    //default to dark
+            
+            if(window.matchMedia("(prefers-color-scheme: light)").matches) {
+                //OS theme setting detected as dark
+                var theme = "light";
+            } else if(!window.matchMedia) {
+                //matchMedia method not supported
+                return false;
+            } else if(localStorage.getItem("theme")){
+                if(localStorage.getItem("theme") == "dark"){ //local storage is used to override OS theme settings
+                    var theme = "dark";
+                }
+            }
+
+            //dark theme preferred, set document with a `data-theme` attribute
+            if (theme=="light") {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        }
+        detectColorScheme();
+    </script>
     <style>
-        /* :root {
+        :root {
             --background : black;
             --light-background: rgb(23,23,23);
             --text: white;
             --button-border: purple;
             --button-background: purple;
             --button-text: white;
-        } */
+        }
 
-        /* :root {
+        [data-theme = "light"] {
             --background: white;
             --light-background: rgba(78, 76, 78, 0.05);
             --text: purple;
             --button-background: white;
             --button-border: purple;
             --button-text: purple;
-        } */
+        }
 
         @font-face {
             font-family: "Lugrasimo";
@@ -124,51 +148,72 @@
             font-family: "Lugrasimo";
         }
 
-        @media(prefers-color-scheme: light) {
-            :root {
-                --background: white;
-                --light-background: rgba(78, 76, 78, 0.05);
-                --text: purple;
-                --button-background: white;
-                --button-border: purple;
-                --button-text: purple;
-            }
+        div.font {
+            position: fixed;
+            bottom: 30px;
+            right : 10px;
+            background: black; 
+            width :50px; 
+            height:50px;
+            border-radius: 50%;
+            border:1px solid white;
+        }
 
-            body {
+        div.font.light {
+            background:white;
+            border:2px solid black;
+        }
+
+        div.font i {
+            position: absolute;
+            color:white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size:2.5rem;
+            z-index: 2;
+        }
+
+        div.font.light i {
+            color:black;
+        }
+
+        div.font:hover {
+            background: rgb(39, 39, 39);
+            cursor:pointer;
+            transition: background .5s ease-in;
+        }
+
+        div.font.light i:hover {
+            cursor: pointer;
+            color:white;
+        }
+
+        /***** Light theme customisations ***/
+        [data-theme = "light"] body {
                 background: var(--light-background);
             }
 
-            div.wrapper input[type="button"]:hover {
+        [data-theme = "light"] div.wrapper input[type="button"]:hover {
                 background: var(--button-text);
                 color: var(--button-background);
                 transition: background, color .4s ease-in-out;
             }
 
-            form {
+        [data-theme = "light"] form {
                 background: var(--background);
             }
 
-            div.wrapper input {
+        [data-theme = "light"] div.wrapper input {
                 background: var(--light-background);
                 border: var(--light-background)
             }
 
-            div.wrapper textarea {
+        [data-theme = "light"] div.wrapper textarea {
                 background: var(--light-background);
                 border: var(--light-background);
-            }
         }
-
-        @media(prefers-color-scheme: dark) {
-            :root {
-                --background : black;
-                --light-background: rgb(23,23,23);
-                --text: white;
-                --button-border: purple;
-                --button-background: purple;
-                --button-text: white;
-            }
-        }
+        /***** Light theme customisations ***/
 
         @media(max-width : 450px) {
             body {
@@ -238,5 +283,49 @@
             />
         </div>
     </form>
+    <div class="font" >
+        <i class="fa-regular fa-moon" 
+            onclick="switchTheme(this)" 
+            onmouseenter="swapSolid(this, 'fa-regular')"
+            onmouseleave="swapSolid(this, 'fa-solid')"
+        >
+        </i>
+    </div>
+    
+    <script>
+            //identify the toggle switch HTML element
+            const toggleSwitch = document.querySelector("i.fa-moon");
+            const fontWrapper = document.querySelector('div.font')
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            fontWrapper.classList.add(currentTheme);
+            //function that changes the theme, and sets a localStorage variable to track the theme between page loads
+            function switchTheme(element) {
+                if (document.documentElement.getAttribute('data-theme')=='light') {
+                    localStorage.setItem('theme', 'dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    element.parentNode.innerHTML = `<i class='fa-solid fa-moon' onclick='switchTheme(this)' onmouseenter="swapSolid(this, 'fa-regular')" onmouseleave="swapSolid(this, 'fa-solid')"></i>`;
+                    fontWrapper.classList.remove('light');
+                    fontWrapper.classList.add('dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    element.parentNode.innerHTML = `<i class='fa-regular fa-moon' onclick='switchTheme(this)' onmouseenter="swapSolid(this, 'fa-regular')" onmouseleave="swapSolid(this, 'fa-solid')"></i>`;
+                    fontWrapper.classList.remove('dark');
+                    fontWrapper.classList.add('light');
+                }    
+            }
+
+            function swapSolid(e, theme) {
+                console.log('entered');
+                if(theme=='fa-solid') {
+                    e.classList.remove('fa-solid');
+                    e.classList.add('fa-regular');
+                } 
+                if(theme=='fa-regular') {
+                    e.classList.remove('fa-regular');
+                    e.classList.add('fa-solid');
+                } 
+            }
+    </script>
 </body>
 </html>
