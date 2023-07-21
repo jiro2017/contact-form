@@ -75,10 +75,30 @@
             left:50%;
             transform: translate(-50%, -50%);
             padding: 5% 10%;
+            /* margin-top:10px; */
             border: 2px solid var(--background);
             border-radius: 16px;
             background: var(--light-background);
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+
+        div.message {
+            position:absolute;
+            top:5px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            z-index:10;
+        }
+
+        div.message p.text {
+            text-align: center;
+            color:white;
+            background: var(--button-background);
+            width:fit-content;
+            padding:1rem;
+            height:100%;
         }
 
         div.wrapper {
@@ -250,7 +270,11 @@
     </style>
 </head>
 <body class="">
+    <div class="message">
+        <p class="text">Message sent successfully</p>
+    </div>
     <form action="" method="POST" enctype="multipart/form-data">
+       
         <div class="wrapper">
             <h1>Contact Us</h1>
         </div>
